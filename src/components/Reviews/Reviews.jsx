@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviews } from 'API/api';
 import { Reviewer, ReviewItem, ReviewList } from './Reviews.styled';
-import { nanoid } from 'nanoid';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -13,7 +12,7 @@ const Reviews = () => {
       try {
         const response = await fetchReviews(filmId);
 
-        if (response.length > 0) {
+        if (response.length) {
           setReviews(response);
         }
       } catch (error) {
@@ -26,11 +25,11 @@ const Reviews = () => {
     <>
       <h2>Reviewers</h2>
       <ReviewList>
-        {reviews.length > 0
+        {reviews.length
           ? reviews.map(reviewer => {
-              const { author, content } = reviewer;
+              const { author, content, id } = reviewer;
               return (
-                <ReviewItem key={nanoid()}>
+                <ReviewItem key={id}>
                   <Reviewer>{author}:</Reviewer>
                   <p>{content}</p>
                 </ReviewItem>

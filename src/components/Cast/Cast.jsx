@@ -10,7 +10,7 @@ const Cast = () => {
     async function getCast() {
       try {
         const response = await fetchCast(filmId);
-        if (response.length > 0) {
+        if (response.length) {
           setCast(response.slice(0, 10));
         }
       } catch (error) {
@@ -21,7 +21,7 @@ const Cast = () => {
   }, [filmId]);
   return (
     <CastList>
-      {cast.length > 0
+      {cast.length
         ? cast.map(({ id, name, character, profile_path }) => {
             return (
               <CastItem key={id}>
